@@ -25,6 +25,15 @@ nav {
   font-size: 1.2rem;
 }
 
+#dashboard {
+  float: right;
+}
+
+#qoute {
+  text-align:center; 
+  display: inline;
+  padding-left: 270px;
+}
 a,
 a:hover,
 a:active,
