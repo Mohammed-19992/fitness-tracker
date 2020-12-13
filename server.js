@@ -13,9 +13,15 @@ let PORT = process.env.PORT || 8080;
 
 // Connecting to the workout database
 mongoose.connect(
-	process.env.MONGODB_URI || "mongodb://localhost/workout", {
-	useNewUrlParser: true,
-});
+	process.env.MONGODB_URI || 'mongodb://localhost/workout-tracker',
+	{
+	  useNewUrlParser: true,
+	  useUnifiedTopology: true,
+	  useCreateIndex: true,
+	  useFindAndModify: false
+	}
+  );
+  
 
 // const URI = process.env.MONGODB_URI || "mongodb://localhost/workout"
 
