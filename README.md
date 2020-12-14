@@ -8,8 +8,10 @@ Fitness Tracker allows the user to view, create and track daily workouts. It mak
 
 ## Screenshot of the project:
 
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/67847324/102106651-d46f8d00-3dfe-11eb-95bb-24807eff59f8.gif)
+
 ## Review
-* The URL of the app on Heroku: https://shielded-lake-04888.herokuapp.com/?id=5fd78187d48d8ab4fc595500
+* The URL of the app on Heroku: https://shielded-lake-04888.herokuapp.com
 * The URL of the GitHub repository: https://github.com/Mohammed-19992/fitness-tracker
 
 ## ISC License
