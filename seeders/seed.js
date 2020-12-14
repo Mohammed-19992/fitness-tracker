@@ -1,9 +1,9 @@
 let mongoose = require("mongoose");
-let db = require("../models");
+const workdb = require("../models/workout")
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb+srv://mohammed:MOHAMMADarafat!123@cluster0.d5xkx.mongodb.net/workout-tracker?retryWrites=true&w=majority", {
-	useNewUrlParser: true,
-	useFindAndModify: false,
+mongoose.connect("mongodb://localhost/workout", {
+  useNewUrlParser: true,
+  useFindAndModify: false
 });
 
 let workoutSeed = [
@@ -121,48 +121,16 @@ let workoutSeed = [
         sets: 4
       }
     ]
-  },
-  {
-		day: new Date().setDate(new Date().getDate() - 1),
-		exercises: [
-			{
-				type: "resistance",
-				name: "Deadlifts",
-				duration: 20,
-				weight: 270,
-				reps: 10,
-				sets: 4,
-			},
-		],
-	},
+  }
 ];
 
-var workoutCountIndex = 0;
-
-function exitProcess() {
-	workoutCountIndex += 1;
-
-	if (workoutCountIndex === workoutSeed.length) {
-		process.exit(0);
-	}
-}
-
-function createWorkout(index) {
-	db.Exercise.create(workoutSeed[index].exercises[0]).then(({ _id }) => {
-		// console.log("index: " + index);
-		db.Workout.create({
-			day: workoutSeed[index].day,
-			exercises: [_id],
-		}).then(() => {
-			exitProcess();
-		});
-	});
-}
-
-db.Exercise.deleteMany({}).then(() => {
-	db.Workout.deleteMany({}).then(() => {
-		for (var i = 0; i < workoutSeed.length; i++) {
-			createWorkout(i);
-		}
-	});
-});
+workdb.deleteMany({})
+  .then(() => workdb.collection.insertMany(workoutSeed))
+  .then(data => {
+    console.log(data.result.n + " records inserted!");
+    process.exit(0);
+  })
+  .catch(err => {
+    console.error(err);
+    process.exit(1);
+  });
